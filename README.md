@@ -2,7 +2,8 @@
 
 This repository demonstrates path-based routing for multiple static micro-frontends behind a single Nginx edge proxy. The proxy terminates TLS on `localhost`, redirects HTTP to HTTPS, and forwards traffic to isolated Electronics and Clothing department frontends based on the URL prefix.
 
-<img width="836" height="518" alt="image" src="https://github.com/user-attachments/assets/13943c2e-aae4-4fa5-9160-c27e7a1916bf" />
+<img width="826" height="487" alt="image" src="https://github.com/user-attachments/assets/94a2070c-0c29-488f-ac9e-05e286c4a82a" />
+
 
 
 ## Architecture

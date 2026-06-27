@@ -1,0 +1,49 @@
+services:
+  # ----------------------------------------------------
+  # Load Balancer / Edge Proxy Service
+  # ----------------------------------------------------
+  my-lb:
+    image: docker.io/library/nginx:latest
+    container_name: my-lb
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./my-lb/config/nginx.conf:/etc/nginx/nginx.conf
+      - ./my-lb/html:/usr/share/nginx/html
+      - ./my-lb/certs:/etc/nginx/certs
+    networks:
+      - lab-net
+    depends_on:
+      - dep-electronics
+      - dep-clothing
+
+  # ----------------------------------------------------
+  # Electronics Department Backend Service
+  # ----------------------------------------------------
+  dep-electronics:
+    image: docker.io/library/nginx:latest
+    container_name: dep-electronics
+    volumes:
+      - ./dep-electronics/html:/usr/share/nginx/html
+    networks:
+      - lab-net
+
+  # ----------------------------------------------------
+  # Clothing Department Backend Service
+  # ----------------------------------------------------
+  dep-clothing:
+    image: docker.io/library/nginx:latest
+    container_name: dep-clothing
+    volumes:
+      - ./dep-clothing/html:/usr/share/nginx/html
+    networks:
+      - lab-net
+
+# ----------------------------------------------------
+# Networks Layer - Automatically replaces pod network mapping
+# ----------------------------------------------------
+networks:
+  lab-net:
+    name: lab-net
+    driver: bridge
